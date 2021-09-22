@@ -59,3 +59,11 @@ function getCircleArea(circle) {
 //Shape라는 인터페이스배열로 이루어지게 타입 지정가능
 var shapes = [new Circle(5), new Rectangle(10, 5)];
 shapes.forEach(function (shape) { return console.log(shape.getArea()); }); //이렇게 내부에 있는 getArea() 사용가능
+var person = {
+    name: "지영",
+    age: 28, //옵셔널체이닝이 걸린 프로퍼티를 사용하면 타입값에 undefined도 추가된다. 따라서 age의 타입은 number | undefined 이다.
+};
+var expert = {
+    name: "셰리",
+    skills: ["javascript", "react"],
+};

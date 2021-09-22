@@ -41,6 +41,8 @@ function returnNothing(): void {
 
 //3. interface 사용하기
 //interface는 타입을 정의한 규칙이며, 클래스, 객체를 위한 타입을 지정할 때 사용되는 문법이다.
+
+//3-1 클래스에서 interface사용하기
 interface Shape {
     getArea(): number; //Shape interface에서 getArea라는 함수가 꼭 있어야 하며 해당 함수의 반환값은 number이다.
 }
@@ -74,3 +76,25 @@ function getCircleArea(circle: Circle) {
 //Shape라는 인터페이스배열로 이루어지게 타입 지정가능
 const shapes: Shape[] = [new Circle(5), new Rectangle(10, 5)];
 shapes.forEach((shape) => console.log(shape.getArea())); //이렇게 내부에 있는 getArea() 사용가능
+
+//3-2 객체에서 interface 사용하기
+interface Person {
+    name: string;
+    age?: number; //?은 옵셔널체이닝이다. 선택적 설정값이다.
+}
+
+interface Developer {
+    name: string;
+    age?: number;
+    skills: string[];
+}
+
+const person: Person = {
+    name: "지영",
+    age: 28, //옵셔널체이닝이 걸린 프로퍼티를 사용하면 타입값에 undefined도 추가된다. 따라서 age의 타입은 number | undefined 이다.
+};
+
+const expert: Developer = {
+    name: "셰리",
+    skills: ["javascript", "react"],
+};
