@@ -29,9 +29,10 @@ function returnNothing() {
     console.log("I am just saying hello world");
 }
 var Circle = /** @class */ (function () {
+    //'implements' 키워드를 사용하여 해당 클래스가 Shape interface의 조건을 충족하겠다는 것을 명시합니다.
     function Circle(radius) {
         this.radius = radius;
-    }
+    } //constructor 파라미터에 접근 제한자를 선언하면 암묵적으로 클래스프로퍼티선언이 이루어진다. public은 외부에서 참조가능
     //너비를 가져오는 함수를 구현합니다. getArea라는 함수를 만들지 않는다면 오류가 생긴다.
     Circle.prototype.getArea = function () {
         return this.radius * this.radius * Math.PI;
@@ -43,6 +44,7 @@ var Rectangle = /** @class */ (function () {
         this.width = width;
         this.height = height;
     }
+    //constructor 파라미터에 접근 제한자를 선언하면 암묵적으로 클래스프로퍼티선언이 이루어진다. private은 클래스 내부와 상속된 곳에서만 참조가능
     Rectangle.prototype.getArea = function () {
         return this.width * this.height;
     };

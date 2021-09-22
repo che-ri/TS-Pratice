@@ -47,11 +47,7 @@ interface Shape {
 
 class Circle implements Shape {
     //'implements' 키워드를 사용하여 해당 클래스가 Shape interface의 조건을 충족하겠다는 것을 명시합니다.
-    radius: number; //멤버 변수 radius 값을 설정합니다.
-
-    constructor(radius: number) {
-        this.radius = radius;
-    }
+    constructor(public radius: number) {} //constructor 파라미터에 접근 제한자를 선언하면 암묵적으로 클래스프로퍼티선언이 이루어진다. public은 외부에서 참조가능
 
     //너비를 가져오는 함수를 구현합니다. getArea라는 함수를 만들지 않는다면 오류가 생긴다.
     getArea() {
@@ -60,19 +56,15 @@ class Circle implements Shape {
 }
 
 class Rectangle implements Shape {
-    width: number;
-    height: number;
-    constructor(width: number, height: number) {
-        this.width = width;
-        this.height = height;
-    }
+    constructor(private width: number, private height: number) {}
+    //constructor 파라미터에 접근 제한자를 선언하면 암묵적으로 클래스프로퍼티선언이 이루어진다. private은 클래스 내부와 상속된 곳에서만 참조가능
     getArea() {
         return this.width * this.height;
     }
 }
 
 //아래처럼 타입 지정가능
-const circle: Circle = new Circle(5);
+const circle = new Circle(5);
 
 //함수처럼 구현가능
 function getCircleArea(circle: Circle) {
@@ -81,4 +73,4 @@ function getCircleArea(circle: Circle) {
 
 //Shape라는 인터페이스배열로 이루어지게 타입 지정가능
 const shapes: Shape[] = [new Circle(5), new Rectangle(10, 5)];
-shapes.forEach(shape => console.log(shape.getArea())); //이렇게 내부에 있는 getArea() 사용가능
+shapes.forEach((shape) => console.log(shape.getArea())); //이렇게 내부에 있는 getArea() 사용가능
