@@ -1,7 +1,7 @@
 //1. 변수에서 타입 정의하기
 let count = 0;
 count += 1;
-count = "갑자기 분위기 문자열"; //숫자로 선언되었던 count를 문자열로 업데이트하면 에러난다!
+// count = "갑자기 분위기 문자열"; //숫자로 선언되었던 count를 문자열로 업데이트하면 에러난다!
 
 const message: string = "hello world"; //문자열
 
@@ -10,14 +10,14 @@ const done: boolean = true; //불리언 값
 const numbers: number[] = [1, 2, 3]; //숫자 배열
 const messages: string[] = ["hello", "world"]; //문자열 배열
 
-messages.push(1); //숫자를 넣으려고 하면 안된다!
+// messages.push(1); //숫자를 넣으려고 하면 안된다!
 
 let mightBeUndefined: string | undefined = undefined; // string 또는 undefined
 let nullableNumber: number | null = null; // number 또는 null
 
 let color: "red" | "orange" | "yellow" = "red"; // 'red', 'orange', 'yellow' 중 하나
 color = "yellow";
-color = "green"; //에러 발생!
+// color = "green"; //에러 발생!
 
 //2. 함수에서 타입 정의하기
 function sum(x: number, y: number): number {
@@ -38,3 +38,47 @@ function returnNothing(): void {
     //아무것도 반환하지 않아야 한다면 void로 명시한다.
     console.log("I am just saying hello world");
 }
+
+//3. interface 사용하기
+//interface는 타입을 정의한 규칙이며, 클래스, 객체를 위한 타입을 지정할 때 사용되는 문법이다.
+interface Shape {
+    getArea(): number; //Shape interface에서 getArea라는 함수가 꼭 있어야 하며 해당 함수의 반환값은 number이다.
+}
+
+class Circle implements Shape {
+    //'implements' 키워드를 사용하여 해당 클래스가 Shape interface의 조건을 충족하겠다는 것을 명시합니다.
+    radius: number; //멤버 변수 radius 값을 설정합니다.
+
+    constructor(radius: number) {
+        this.radius = radius;
+    }
+
+    //너비를 가져오는 함수를 구현합니다. getArea라는 함수를 만들지 않는다면 오류가 생긴다.
+    getArea() {
+        return this.radius * this.radius * Math.PI;
+    }
+}
+
+class Rectangle implements Shape {
+    width: number;
+    height: number;
+    constructor(width: number, height: number) {
+        this.width = width;
+        this.height = height;
+    }
+    getArea() {
+        return this.width * this.height;
+    }
+}
+
+//아래처럼 타입 지정가능
+const circle: Circle = new Circle(5);
+
+//함수처럼 구현가능
+function getCircleArea(circle: Circle) {
+    return circle.getArea();
+}
+
+//Shape라는 인터페이스배열로 이루어지게 타입 지정가능
+const shapes: Shape[] = [new Circle(5), new Rectangle(10, 5)];
+shapes.forEach(shape => console.log(shape.getArea())); //이렇게 내부에 있는 getArea() 사용가능
