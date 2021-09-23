@@ -103,3 +103,32 @@ const expert: Developer = {
     name: "셰리",
     skills: ["javascript", "react"],
 };
+
+//4. Type Alias 사용하기
+//type은 특정 타입에 별칭을 붙이는 용도로 사용합니다.
+
+type PersonType = {
+    name: string;
+    age?: number;
+};
+
+//&은 교차타입(intersection Type)으로서 두개 이상의 타입을 합쳐줍니다.
+type DeveloperType = PersonType & {
+    skills: string[];
+};
+
+const person2: PersonType = {
+    name: "지영",
+};
+
+const expert2: DeveloperType = {
+    name: "셰리",
+    skills: ["javascript", "react"],
+};
+
+type PeopleType = PersonType[]; // PersonType[] 를 이제 앞으로 PeopleType 이라는 타입으로 사용 할 수 있습니다.
+const people: PeopleType = [person2, expert2]; //콘솔 찍으면 array object로 나온다.
+
+type Color = "red" | "orange" | "yellow";
+const redColor: Color = "red";
+const colors: Color[] = ["red", "orange"];

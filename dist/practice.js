@@ -67,3 +67,13 @@ var expert = {
     name: "셰리",
     skills: ["javascript", "react"],
 };
+var person2 = {
+    name: "지영",
+};
+var expert2 = {
+    name: "셰리",
+    skills: ["javascript", "react"],
+};
+var people = [person2, expert2]; //콘솔 찍으면 array object로 나온다.
+var redColor = "red";
+var colors = ["red", "orange"];
