@@ -83,9 +83,14 @@ interface Person {
     age?: number; //?은 옵셔널체이닝이다. 선택적 설정값이다.
 }
 
-interface Developer {
-    name: string;
-    age?: number;
+// interface Developer {
+//     name: string;
+//     age?: number;
+//     skills: string[];
+// }
+// 위의 코드에서 Developer 인터페이스는 Person 인터페이스와 구조가 비슷하므로 아래처럼 extend 구문을 활용할 수 있다.
+
+interface Developer extends Person {
     skills: string[];
 }
 
