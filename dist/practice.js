@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 //1. 변수에서 타입 정의하기
 var count = 0;
 count += 1;
@@ -77,3 +88,26 @@ var expert2 = {
 var people = [person2, expert2]; //콘솔 찍으면 array object로 나온다.
 var redColor = "red";
 var colors = ["red", "orange"];
+//5. Generics 사용하기
+//제너릭(Generics)은 타입스크립트에서 함수, 클래스, interface, type alias 를 사용하게 될 때 여러 종류의 타입에 대하여 호환을 맞춰야 하는 상황에서 사용하는 문법입니다.
+//https://joshua1988.github.io/ts/guide/generics.html#%EC%A0%9C%EB%84%A4%EB%A6%AD%EC%9D%98-%ED%95%9C-%EC%A4%84-%EC%A0%95%EC%9D%98%EC%99%80-%EC%98%88%EC%8B%9C
+//5-1. 함수에서 Generics 사용하기
+//아래와 같은 상황에서 Generics를 사용할 수 있습니다
+// function merge(a: any, b: any): any {
+//     return {
+//         ...a,
+//         ...b,
+//     };
+// }
+// const merged = merge({ foo: 1 }, { bar: 1 });
+//위의 코드는 아래처럼 구현할 수 있습니다.
+function merge(a, b) {
+    return __assign(__assign({}, a), b);
+}
+var merged = merge({ foo: 1 }, { bar: 1 });
+function wrap(param) {
+    return {
+        param: param,
+    };
+}
+var wrapped = wrap(10);
