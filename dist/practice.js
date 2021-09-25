@@ -111,3 +111,9 @@ function wrap(param) {
     };
 }
 var wrapped = wrap(10);
+var items = {
+    list: ["a", "b", "c"],
+};
+var itemsUsingType = {
+    list: ["a", "b", "c"],
+};

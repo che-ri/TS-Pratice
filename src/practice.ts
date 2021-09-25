@@ -56,7 +56,7 @@ function getCircleArea(circle: Circle) {
 }
 //Shape라는 인터페이스배열로 이루어지게 타입 지정가능
 const shapes: Shape[] = [new Circle(5), new Rectangle(10, 5)];
-shapes.forEach(shape => console.log(shape.getArea())); //이렇게 내부에 있는 getArea() 사용가능
+shapes.forEach((shape) => console.log(shape.getArea())); //이렇게 내부에 있는 getArea() 사용가능
 //3-2 객체에서 interface 사용하기
 interface Person {
     name: string;
@@ -124,3 +124,21 @@ function wrap<T>(param: T) {
     };
 }
 const wrapped = wrap(10);
+
+//5-2. interface에서 generics사용하기
+interface Items<T> {
+    list: T[];
+}
+
+const items: Items<string> = {
+    list: ["a", "b", "c"],
+};
+
+//5-3. type에서 generics 사용하기
+type ItemsType<T> = {
+    list: T[];
+};
+
+const itemsUsingType: ItemsType<string> = {
+    list: ["a", "b", "c"],
+};
