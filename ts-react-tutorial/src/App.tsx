@@ -4,7 +4,10 @@ import "./App.css";
 import Greetings from "./Greetings";
 
 function App() {
-    return <Greetings name="cheri" />;
+    const onClick = (name: string) => {
+        console.log(`${name} says hello`);
+    };
+    return <Greetings name="cheri" onClick={onClick} />;
 }
 
 export default App;
