@@ -1,13 +1,23 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import Greetings from "./Greetings";
+import Counter from "./Counter";
 
 function App() {
     const onClick = (name: string) => {
         console.log(`${name} says hello`);
     };
-    return <Greetings name="cheri" onClick={onClick} />;
+    return (
+        <div>
+            <div>
+                <span> 💻 Greetings</span>
+                <Greetings name="cheri" onClick={onClick} />
+            </div>
+            <div>
+                <span> 💻 Counter </span>
+                <Counter />
+            </div>
+        </div>
+    );
 }
 
 export default App;
