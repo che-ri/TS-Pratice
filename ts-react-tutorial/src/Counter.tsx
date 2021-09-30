@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
+
+//사용할 액션들을 |을 이용하여 나열한다.
+type Action = { type: "INCREASE" } | { type: "DECREASE" };
+
+//redux처럼 state와 action을 넣어주고 액션 case마다 함수를 정의해준다.
+function reducer(state: number, action: Action): number {
+    switch (action.type) {
+        case "INCREASE":
+            return state + 1;
+        case "DECREASE":
+            return state - 1;
+        default:
+            throw new Error("Unhandled action");
+    }
+}
 
 const Counter = () => {
-    //useState에서 타입을 설정하려면 Generics를 이용한다. ex) useState<type명>()
+    //useReducer 사용법
+    //const [state, dispatch] = useReducer(reducer, initialArg, init);
+    const [count, dispatch] = useReducer(reducer, 0);
 
-    //아래와 같은 경우에는 <number>처럼 Generics를 입력하지 않더라도 타입유추가 가능하기에 생략해도된다.
-    const [count, setCount] = useState<number>(0);
+    //실행할 액션를 넘겨줍니다.
+    const onIncrease = () => dispatch({ type: "INCREASE" });
+    const onDecrease = () => dispatch({ type: "DECREASE" });
 
-    //하지만 아래처럼 타입이 null일 수도 있고, 아닐수도 있을 때에 Generics를 사용하면 좋다.
-    type Information = { name: string; description: string };
-    const [info, setInformation] = useState<Information | null>(null);
-
-    const onIncrease = () => setCount(count + 1);
-    const onDecrease = () => setCount(count - 1);
     return (
         <div>
             <h1>{count}</h1>
