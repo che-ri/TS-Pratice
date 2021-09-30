@@ -3,6 +3,7 @@ import Greetings from "./Greetings";
 import Counter from "./Counter";
 import MyForm from "./MyForm";
 import ReducerSample from "./ReducerSample";
+import { SampleProvider } from "./SampleContext";
 
 function App() {
     const onClick = (name: string) => {
@@ -30,6 +31,9 @@ function App() {
                 <span> 💻 ReducerSample </span>
                 <ReducerSample />
             </div>
+            <SampleProvider>
+                <ReducerSample />
+            </SampleProvider>
         </div>
     );
 }
