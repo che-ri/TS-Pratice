@@ -29,7 +29,6 @@ function App() {
             </div>
             <div>
                 <span> 💻 ReducerSample </span>
-                <ReducerSample />
             </div>
             <SampleProvider>
                 <ReducerSample />
