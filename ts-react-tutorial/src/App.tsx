@@ -5,6 +5,7 @@ import MyForm from "./MyForm";
 import ReducerSample from "./ReducerSample";
 import { SampleProvider } from "./SampleContext";
 import CounterContainer from "./containers/CounterContainer";
+import TodoApp from "./containers/TodoApp";
 
 function App() {
     const onClick = (name: string) => {
@@ -36,6 +37,9 @@ function App() {
             </SampleProvider>
             <div>
                 <CounterContainer />
+            </div>
+            <div>
+                <TodoApp />
             </div>
         </div>
     );
