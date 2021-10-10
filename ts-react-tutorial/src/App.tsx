@@ -4,6 +4,7 @@ import Counter from "./Counter";
 import MyForm from "./MyForm";
 import ReducerSample from "./ReducerSample";
 import { SampleProvider } from "./SampleContext";
+import CounterContainer from "./containers/CounterContainer";
 
 function App() {
     const onClick = (name: string) => {
@@ -33,6 +34,9 @@ function App() {
             <SampleProvider>
                 <ReducerSample />
             </SampleProvider>
+            <div>
+                <CounterContainer />
+            </div>
         </div>
     );
 }
