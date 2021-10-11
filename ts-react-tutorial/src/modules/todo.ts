@@ -1,3 +1,11 @@
+import {
+    deprecated,
+    ActionType,
+    createReducer,
+    Action,
+} from "typesafe-actions";
+const { createAction, createStandardAction } = deprecated;
+
 //📌action
 //as const 를 사용하면 action.type이 string으로 추론되지않고, 문자열로 추론된다!!
 const ADD_TODO = "todos/ADD_TODO" as const;
@@ -7,30 +15,21 @@ const REMOVE_TODO = "todos/REMOVE_TODO" as const;
 let nextId = 1; //임시로 사용할 todo의 id값
 
 //📌action creator
-export const addTodo = (text: string) => ({
-    type: ADD_TODO,
-    payload: {
-        id: nextId++,
-        text,
-    },
-});
-
-export const toggleTodo = (id: number) => ({
-    type: TOGGLE_TODO,
-    payload: id,
-});
-
-export const removeTodo = (id: number) => ({
-    type: REMOVE_TODO,
-    payload: id,
-});
+export const addTodo = createAction(
+    ADD_TODO,
+    action => (text: string) =>
+        action({
+            id: nextId++,
+            text,
+        })
+);
+export const toggleTodo = createStandardAction(TOGGLE_TODO)<number>();
+export const removeTodo = createStandardAction(REMOVE_TODO)<number>();
 
 //📌action type
-// ReturnType<typeof _____> 는 특정 함수의 반환값을 추론해줍니다
-type TodosAction =
-    | ReturnType<typeof addTodo>
-    | ReturnType<typeof toggleTodo>
-    | ReturnType<typeof removeTodo>;
+const actions = { addTodo, toggleTodo, removeTodo };
+
+type TodosAction = ActionType<typeof actions>;
 
 //📌state type
 export type Todo = {
@@ -45,31 +44,15 @@ export type TodosState = Todo[]; //Todo 객체로 이루어진 배열이다. ex)
 const initialState: TodosState = [];
 
 //📌reducer
-function todos(
-    state: TodosState = initialState,
-    action: TodosAction
-): TodosState {
-    switch (action.type) {
-        //case를 적고, ctrl+space를 하면 action 선언시 as const로 설정한 action들이 자동으로 뜬다.
-        case "todos/ADD_TODO":
-            return state.concat({
-                //payload안에 있는 값들이 모두 유추가 된다!
-                id: action.payload.id,
-                text: action.payload.text,
-                done: false,
-            });
-        case "todos/TOGGLE_TODO":
-            //payload가 number인 것이 유추된다
-            return state.map(todo =>
-                todo.id === action.payload
-                    ? { ...todo, done: !todo.done }
-                    : todo
-            );
-        case "todos/REMOVE_TODO":
-            return state.filter(todo => todo.id !== action.payload);
-        default:
-            return state;
-    }
-}
+const todos = createReducer<TodosState, TodosAction>(initialState, {
+    [ADD_TODO]: (state, action) =>
+        state.concat({ ...action.payload, done: false }),
+    [TOGGLE_TODO]: (state, { payload: id }) =>
+        state.map(todo =>
+            todo.id === id ? { ...todo, done: !todo.done } : todo
+        ),
+    [REMOVE_TODO]: (state, { payload: id }) =>
+        state.filter(todo => todo.id !== id),
+});
 
 export default todos;
