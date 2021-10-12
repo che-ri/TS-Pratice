@@ -6,6 +6,7 @@ import ReducerSample from "./ReducerSample";
 import { SampleProvider } from "./SampleContext";
 import CounterContainer from "./containers/CounterContainer";
 import TodoApp from "./containers/TodoApp";
+import GithubProfileLoader from "./containers/GithubProfileLoader";
 
 function App() {
     const onClick = (name: string) => {
@@ -40,6 +41,9 @@ function App() {
             </div>
             <div>
                 <TodoApp />
+            </div>
+            <div>
+                <GithubProfileLoader />
             </div>
         </div>
     );
